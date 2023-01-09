@@ -75,6 +75,9 @@ public class VotoService {
     }
     public boolean validaRequest(VotoForm form){
 
+        if(form.getIdSessao()==null){
+            return false;
+        }
         if(!sessaoService.verificaSessaoIfExist(form.getIdSessao())){
             return false;
         }
