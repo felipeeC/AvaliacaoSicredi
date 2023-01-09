@@ -17,7 +17,7 @@ public class Voto {
     private List<Sessao> sessoes = new ArrayList<>();
 
 
-
+    //Constructors
     public Voto(){
         super();
     }
@@ -29,50 +29,40 @@ public class Voto {
         this.idSessao =idSessao;
     }
 
+    //Getters e Setters
     public Long getIdSessao() {
         return idSessao;
     }
-
     public void setIdSessao(Long idSessao) {
         this.idSessao = idSessao;
     }
-
     public String getCpf() {
         return cpf;
     }
-
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public Date getDataVoto() {
         return dataVoto;
     }
-
     public void setDataVoto(Date dataVoto) {
         this.dataVoto = dataVoto;
     }
-
     public String getResposta() {
         return resposta;
     }
-
     public void setResposta(String resposta) {
         this.resposta = resposta;
     }
-
     public List<Sessao> getSessoes() {
         return sessoes;
     }
-
     public void setSessoes(List<Sessao> sessoes) {
         this.sessoes = sessoes;
     }

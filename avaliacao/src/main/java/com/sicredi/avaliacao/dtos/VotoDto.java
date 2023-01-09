@@ -22,49 +22,37 @@ public class VotoDto {
         this.resposta = voto.getResposta();
         this.idSessao = voto.getIdSessao();
     }
-
-    public static List<VotoDto> converter(List<Voto> votos){
-        return votos.stream().map(VotoDto::new).collect(Collectors.toList());
-    }
-
-
     public Long getIdSessao() {
         return idSessao;
     }
-
     public void setIdSessao(Long idSessao) {
         this.idSessao = idSessao;
     }
-
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getCpf() {
         return cpf;
     }
-
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
     public Date getDataVoto() {
         return dataVoto;
     }
-
     public void setDataVoto(Date dataVoto) {
         this.dataVoto = dataVoto;
     }
-
     public String getResposta() {
         return resposta;
     }
-
     public void setResposta(String resposta) {
         this.resposta = resposta;
+    }
+    public static List<VotoDto> converter(List<Voto> votos){
+        return votos.stream().map(VotoDto::new).collect(Collectors.toList());
     }
 }

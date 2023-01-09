@@ -15,9 +15,7 @@ public class VotoForm {
     private Long idSessao;
 
 
-
     public VotoForm(String cpf, String resposta, Long idSessao){
-
         this.cpf=cpf;
         this.resposta=resposta;
         this.idSessao=idSessao;
@@ -25,27 +23,21 @@ public class VotoForm {
     public Long getIdSessao() {
         return idSessao;
     }
-
     public void setIdSessao(Long idSessao) {
         this.idSessao = idSessao;
     }
-
     public String getCpf() {
         return cpf;
     }
-
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
     public String getResposta() {
         return resposta;
     }
-
     public void setResposta(String resposta) {
         this.resposta = resposta;
     }
-
     public Voto converter(){return new Voto(cpf,resposta, idSessao);
     }
 }
