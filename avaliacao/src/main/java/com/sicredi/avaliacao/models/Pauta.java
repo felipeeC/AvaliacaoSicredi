@@ -9,7 +9,7 @@ public class Pauta {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String nome;
+	private String titulo;
 	private String descricao;
 	@ManyToMany
 	private List<Sessao> sessoes = new ArrayList<>();
@@ -22,9 +22,9 @@ public class Pauta {
 		super();
 	}
 
-	public Pauta(String nome, String descricao) {
+	public Pauta(String titulo, String descricao) {
 		super();
-		this.nome = nome;
+		this.titulo = titulo;
 		this.descricao = descricao;
 	}
 	
@@ -36,12 +36,12 @@ public class Pauta {
 	public void setSessoes(List<Sessao> sessoes) {
 		this.sessoes = sessoes;
 	}
-	public String getNome() {
-		return nome;
+	public String getTitulo() {
+		return titulo;
 	}
 	
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 	public String getDescricao() {
@@ -60,5 +60,5 @@ public class Pauta {
 	}
 
 	@Override
-	public String toString(){return this.id + "\t" + this.nome + "\t\t" + this.descricao;}
+	public String toString(){return this.id + "\t" + this.titulo + "\t\t" + this.descricao;}
 }

@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.sicredi.avaliacao.services.PautaService;
 import org.springframework.web.util.UriComponentsBuilder;
-import com.sicredi.avaliacao.dtos.PautaDto;
+
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
@@ -24,7 +24,7 @@ public class PautaController {
     @PostMapping
     public ResponseEntity<PautaDto> cadastrar(@RequestBody @Valid PautaForm form,UriComponentsBuilder uriBuilder) {
         Pauta pautaNova = pautaService.cria(form);
-        if (pautaNova != null && !pautaNova.getNome().equals("")) {
+        if (pautaNova != null && !pautaNova.getTitulo().equals("")) {
             //return ResponseEntity.status(HttpStatus.CREATED).build();
             URI uri = uriBuilder.path("/pautas/{id}").buildAndExpand(pautaNova.getId()).toUri();
             return ResponseEntity.created(uri).body(new PautaDto(pautaNova));

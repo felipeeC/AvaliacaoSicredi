@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class PautaDto {
     private Long id;
-    private String nome;
+    private String titulo;
     private String descricao;
 
 
@@ -15,7 +15,7 @@ public class PautaDto {
     public PautaDto(Pauta pauta){
         super();
         this.id= pauta.getId();
-        this.nome= pauta.getNome();
+        this.titulo = pauta.getTitulo();
         this.descricao= pauta.getDescricao();
     }
 
@@ -25,8 +25,8 @@ public class PautaDto {
 
 
 
-    public String getNome() {
-        return nome;
+    public String getTitulo() {
+        return titulo;
     }
 
 
@@ -40,8 +40,8 @@ public class PautaDto {
         this.id = id;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public void setDescricao(String descricao) {

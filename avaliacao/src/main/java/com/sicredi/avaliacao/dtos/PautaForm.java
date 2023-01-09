@@ -6,21 +6,21 @@ import javax.validation.constraints.NotNull;
 
 public class PautaForm {
     @NotNull
-    private String nome;
+    private String titulo;
     @NotNull
     private String descricao;
 
-    public PautaForm(@NotNull String nome, @NotNull String descricao){
-        this.nome=nome;
+    public PautaForm(@NotNull String titulo, @NotNull String descricao){
+        this.titulo =titulo;
         this.descricao=descricao;
     }
 
-    public String getNome() {
-        return nome;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getDescricao() {
@@ -32,6 +32,6 @@ public class PautaForm {
     }
 
     public Pauta converter(){
-        return new Pauta(nome,descricao);
+        return new Pauta(titulo,descricao);
     }
 }
