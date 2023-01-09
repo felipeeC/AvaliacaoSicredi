@@ -2,7 +2,7 @@ package com.sicredi.avaliacao.dtos;
 
 import com.sicredi.avaliacao.models.Pauta;
 import com.sicredi.avaliacao.models.Sessao;
-import com.sun.istack.NotNull;
+
 
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;

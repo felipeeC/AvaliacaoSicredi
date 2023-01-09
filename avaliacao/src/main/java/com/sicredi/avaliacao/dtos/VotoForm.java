@@ -1,8 +1,9 @@
 package com.sicredi.avaliacao.dtos;
 
 import com.sicredi.avaliacao.models.Voto;
-import com.sun.istack.NotNull;
 
+
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class VotoForm {

@@ -1,6 +1,8 @@
 package com.sicredi.avaliacao.dtos;
 import com.sicredi.avaliacao.models.Pauta;
-import com.sun.istack.NotNull;
+
+import javax.validation.constraints.NotNull;
+
 
 public class PautaForm {
     @NotNull
