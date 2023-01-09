@@ -21,35 +21,26 @@ public class SessaoDto {
         this.dataFim = sessao.getDafaFim();
 
     }
-
-    public static List<SessaoDto> converter(List<Sessao> sessoes){
-        return sessoes.stream().map(SessaoDto::new).collect(Collectors.toList());
-    }
-
-
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public Date getDataInicio() {
         return dataInicio;
     }
-
     public void setDataInicio(Date dataInicio) {
         this.dataInicio = dataInicio;
     }
-
     public Date getDataFim() {
         return dataFim;
     }
-
     public void setDataFim(Date dataFim) {
         this.dataFim = dataFim;
     }
 
-
+    public static List<SessaoDto> converter(List<Sessao> sessoes){
+        return sessoes.stream().map(SessaoDto::new).collect(Collectors.toList());
+    }
 }

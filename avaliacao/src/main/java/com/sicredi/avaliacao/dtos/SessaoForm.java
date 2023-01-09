@@ -25,13 +25,9 @@ public class SessaoForm {
     public Date getDataFim() {
         return dataFim;
     }
-
     public void setDataFim(Date dataFim) {
         this.dataFim = dataFim;
     }
-
-
-
 
     public Sessao converter(){
         return new Sessao(dataFim);
