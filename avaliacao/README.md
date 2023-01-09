@@ -1,4 +1,4 @@
-# Desafio Sicredi - API REST Sessoes de votação
+# Desafio Sicredi - API REST Sessões de votação
 
 # índice
 * [Índice](#índice)
