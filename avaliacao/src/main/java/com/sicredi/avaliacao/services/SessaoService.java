@@ -23,15 +23,13 @@ public class SessaoService {
     public Sessao criaSessao(@Valid SessaoForm form, Long idPauta){
         Sessao sessao = converteSessaoForm(form);
         Date date = new Date(System.currentTimeMillis());
-        System.out.println("DATA DA SESSAO: "+date+ " DATA FIM: "+form.getDataFim());
+        //System.out.println("DATA DA SESSAO: "+date+ " DATA FIM: "+form.getDataFim());
         sessao.setDataInicio(date);
 
         if(form.getDataFim() == null){
             sessao.setDafaFim(addMinutosJavaUtilDate(date));
         }else{
-            System.out.println("caiu no else");
             if (verificaDatas(sessao.getDafaFim(), sessao.getDataInicio())){
-                System.out.println("morreu no confere data");
                 return null;
             }
         }
@@ -77,16 +75,4 @@ public class SessaoService {
 
         return sessaoRepository.findById(id).isPresent();
     }
-//    public Sessao votar(SessaoForm form,Long idSessao){
-//        if(!verificaSessaoIfExist(idSessao)){
-//            return null;
-//        }else {
-//            Sessao sessao = getSessaoById(idSessao);
-//            sessao.setCpfVotante(form.getCpfVotante());
-//            sessao.setEscolha(form.getEscolha());
-//            sessaoRepository.save(sessao);
-//            return sessao;
-//        }
-
-//    }
 }
