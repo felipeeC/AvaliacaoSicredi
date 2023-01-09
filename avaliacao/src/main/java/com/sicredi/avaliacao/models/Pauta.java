@@ -15,9 +15,7 @@ public class Pauta {
 	private List<Sessao> sessoes = new ArrayList<>();
 
 
-//Construtor
-
-
+    //Construtors
 	public Pauta(){
 		super();
 	}
@@ -27,34 +25,30 @@ public class Pauta {
 		this.titulo = titulo;
 		this.descricao = descricao;
 	}
-	
+
+
 	//Getters e Setters
 	public List<Sessao> getSessoes() {
 		return sessoes;
 	}
-
 	public void setSessoes(List<Sessao> sessoes) {
 		this.sessoes = sessoes;
 	}
 	public String getTitulo() {
 		return titulo;
 	}
-	
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-
 	public String getDescricao() {
 		return descricao;
 	}
-
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
