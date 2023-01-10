@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -34,24 +35,12 @@ public class SessaoControllerTest {
     static final ObjectMapper mapper = new ObjectMapper();
     @Test
     public void criaSessaoComErroNaData() throws Exception{
-
-        Date horaAtual = new Date(System.currentTimeMillis());
-        int minutos=-1;
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(horaAtual);
-        calendar.add(Calendar.MINUTE, minutos);
-
-
         SessaoForm sessaoForm = new SessaoForm();
-        sessaoForm.setDataFim(calendar.getTime());
-        System.out.println("HORA ATUAL:" + horaAtual);
-        System.out.println("HORA errada:" + calendar.getTime());
-
+        sessaoForm.setDataFim(LocalDateTime.now().minusMinutes(1));
         URI uri = new URI("/sessoes/1");
-
         mockMvc.perform(
-                        MockMvcRequestBuilders.post(uri).content(asJsonString(sessaoForm)).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().is(HttpStatus.NOT_FOUND.value()));
+            MockMvcRequestBuilders.post(uri).content(asJsonString(sessaoForm)).contentType(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().is(HttpStatus.NOT_FOUND.value()));
     }
 
     public static String asJsonString(final Object obj) {

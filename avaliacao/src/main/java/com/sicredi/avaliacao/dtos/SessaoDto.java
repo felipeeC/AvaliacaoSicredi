@@ -1,15 +1,13 @@
 package com.sicredi.avaliacao.dtos;
-
 import com.sicredi.avaliacao.models.Sessao;
-
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class SessaoDto {
     private Long id;
-    private Date dataInicio;
-    private Date dataFim;
+    private LocalDateTime dataInicio;
+    private LocalDateTime dataFim;
 
     public SessaoDto(){
         super();
@@ -21,26 +19,25 @@ public class SessaoDto {
         this.dataFim = sessao.getDafaFim();
 
     }
+
     public Long getId() {
         return id;
     }
     public void setId(Long id) {
         this.id = id;
     }
-    public Date getDataInicio() {
+    public LocalDateTime getDataInicio() {
         return dataInicio;
     }
-    public void setDataInicio(Date dataInicio) {
+    public void setDataInicio(LocalDateTime dataInicio) {
         this.dataInicio = dataInicio;
     }
-    public Date getDataFim() {
+    public LocalDateTime getDataFim() {
         return dataFim;
     }
-    public void setDataFim(Date dataFim) {
+    public void setDataFim(LocalDateTime dataFim) {
         this.dataFim = dataFim;
     }
 
-    public static List<SessaoDto> converter(List<Sessao> sessoes){
-        return sessoes.stream().map(SessaoDto::new).collect(Collectors.toList());
-    }
+
 }

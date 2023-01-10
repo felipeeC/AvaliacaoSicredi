@@ -1,4 +1,4 @@
-package com.sicredi.avaliacao;
+package com.sicredi.avaliacao.Configuracoes;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
