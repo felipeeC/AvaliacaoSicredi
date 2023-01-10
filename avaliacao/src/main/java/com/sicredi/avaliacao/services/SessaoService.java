@@ -17,49 +17,31 @@ public class SessaoService {
     @Autowired
     private PautaService pautaService;
 
-
-    public Sessao criaSessao(@Valid SessaoForm form, Long idPauta){
-        Sessao sessao = converteSessaoForm(form);
-        Date date = new Date(System.currentTimeMillis());
-        //System.out.println("DATA DA SESSAO: "+date+ " DATA FIM: "+form.getDataFim());
-        sessao.setDataInicio(date);
-
+    public Sessao criarSessao(SessaoForm form, Long idPauta){
+        Sessao sessao = ConversorSessao.converterSessaoFormParaSessao(form);
+        sessao.setDataInicio(LocalDateTime.now());
         if(form.getDataFim() == null){
-            sessao.setDafaFim(addMinutosJavaUtilDate(date));
-        }else{
-            if (verificaDatas(sessao.getDafaFim(), sessao.getDataInicio())){
-                return null;
-            }
+            sessao.setDafaFim(LocalDateTime.now().plusMinutes(1));
+            return sessao;
         }
-
-        sessaoRepository.save(sessao);
-        associaPauta(sessao.getId(),idPauta);
-        return sessao;
+        if (sessao.getDafaFim().isBefore(sessao.getDataInicio())){
+            return null;
+        }
+        else {
+            sessaoRepository.save(sessao);
+            associarPauta(sessao.getId(),idPauta);
+            return sessao;
+        }
     }
-    public void associaPauta(Long idSessao, Long idPauta){
-        Pauta pauta = pautaService.getPautaById(idPauta);
-        Optional<Sessao> sessao = Optional.ofNullable(getSessaoById(idSessao));
-
-        sessao.get().getPautas().add(pauta);
+    public void associarPauta(Long idSessao, Long idPauta){
+        Optional<Sessao> sessao = Optional.ofNullable(BuscarSessaoPorId(idSessao));
+        sessao.get().getPautas().add(pautaService.buscarPautaPorId(idPauta));
         sessaoRepository.save(sessao.get());
     }
-    public boolean verificaDatas(Date dataFim, Date dataInicio){
-        boolean result = dataFim.getTime() < dataInicio.getTime();
-        return result;
+    public Sessao converterSessaoFormEmSessao(SessaoForm form){
+        return ConversorSessao.converterSessaoFormParaSessao(form);
     }
-    public Date addMinutosJavaUtilDate(Date date) {
-        int minutos=1;
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        calendar.add(Calendar.MINUTE, minutos);
-        return calendar.getTime();
-    }
-    public Sessao converteSessaoForm(SessaoForm form){
-        Sessao sessao = form.converter();
-        return sessao;
-    }
-
-    public Sessao getSessaoById(Long id){
+    public Sessao BuscarSessaoPorId(Long id){
         Optional<Sessao> obj = sessaoRepository.findById(id);
         return obj.orElseThrow(
                 () -> new ObjectNotFoundException("Sessão Não Encontrada! id:"  + id, ""));
