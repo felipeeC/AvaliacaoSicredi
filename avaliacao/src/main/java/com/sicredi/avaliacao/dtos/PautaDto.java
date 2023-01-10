@@ -1,7 +1,5 @@
 package com.sicredi.avaliacao.dtos;
-
 import com.sicredi.avaliacao.models.Pauta;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,8 +7,6 @@ public class PautaDto {
     private Long id;
     private String titulo;
     private String descricao;
-
-
 
     public PautaDto(Pauta pauta){
         super();
@@ -37,7 +33,5 @@ public class PautaDto {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    public static List<PautaDto> converter(List<Pauta> pautas){
-        return pautas.stream().map(PautaDto::new).collect(Collectors.toList());
-    }
+
 }

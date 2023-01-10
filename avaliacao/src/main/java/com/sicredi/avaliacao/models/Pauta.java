@@ -14,20 +14,15 @@ public class Pauta {
 	@ManyToMany
 	private List<Sessao> sessoes = new ArrayList<>();
 
-
-    //Construtors
 	public Pauta(){
 		super();
 	}
-
 	public Pauta(String titulo, String descricao) {
 		super();
 		this.titulo = titulo;
 		this.descricao = descricao;
 	}
 
-
-	//Getters e Setters
 	public List<Sessao> getSessoes() {
 		return sessoes;
 	}
@@ -52,7 +47,6 @@ public class Pauta {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	@Override
 	public String toString(){return this.id + "\t" + this.titulo + "\t\t" + this.descricao;}
 }

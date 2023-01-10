@@ -1,48 +1,38 @@
 package com.sicredi.avaliacao.controllers;
-
 import com.sicredi.avaliacao.dtos.PautaDto;
 import com.sicredi.avaliacao.dtos.PautaForm;
 import com.sicredi.avaliacao.models.Pauta;
+import com.sicredi.avaliacao.Conversores.ConversorPauta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.sicredi.avaliacao.services.PautaService;
 import org.springframework.web.util.UriComponentsBuilder;
-
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
-
-
 @RestController
 @RequestMapping(value = "/pautas")
 public class PautaController {
     @Autowired
     private PautaService pautaService;
-
     @PostMapping
-    public ResponseEntity<PautaDto> cadastrar(@RequestBody @Valid PautaForm form,UriComponentsBuilder uriBuilder) {
-        Pauta pautaNova = pautaService.cria(form);
+    public ResponseEntity<PautaDto> cadastrarPauta(@RequestBody @Valid PautaForm form,UriComponentsBuilder uriBuilder) {
+        Pauta pautaNova = pautaService.criarPauta(form);
         if (pautaNova != null && !pautaNova.getTitulo().equals("")) {
-            //return ResponseEntity.status(HttpStatus.CREATED).build();
             URI uri = uriBuilder.path("/pautas/{id}").buildAndExpand(pautaNova.getId()).toUri();
             return ResponseEntity.created(uri).body(new PautaDto(pautaNova));
         } else {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
     }
-
     @GetMapping
-    public List<PautaDto> todasPautas(){
-        List<Pauta> pautas = pautaService.imprimePautas();
-        return PautaDto.converter(pautas);
+    public List<PautaDto> imprimirTodasPautas(){
+        return ConversorPauta.converterPautaParaPautaDto(pautaService.imprimirPautas());
     }
-
     @GetMapping("/{id}")
-    public ResponseEntity<PautaDto> getPautaById(@PathVariable(name = "id") long id){
-     Pauta pauta= pautaService.getPautaById(id);
-     return ResponseEntity.ok(new PautaDto(pauta));
+    public ResponseEntity<PautaDto> buscarPautaPorId(@PathVariable(name = "id") long id){
+     return ResponseEntity.ok(new PautaDto(pautaService.buscarPautaPorId(id)));
     }
-
 }
