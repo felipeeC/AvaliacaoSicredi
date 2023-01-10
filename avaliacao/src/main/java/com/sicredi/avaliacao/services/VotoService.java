@@ -22,7 +22,6 @@ public class VotoService {
         voto.setCpf(form.getCpf());
         voto.setResposta(form.getResposta());
         voto.setIdSessao(form.getIdSessao());
-        System.out.println("DataDoVoto: "+ voto.getDataVoto());
         votoRepository.save(voto);
         return voto;
     }
