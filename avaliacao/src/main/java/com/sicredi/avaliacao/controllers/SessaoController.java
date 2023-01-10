@@ -16,7 +16,7 @@ public class SessaoController {
     @Autowired
     SessaoService sessaoService;
 
-    
+
     @PostMapping(value = "/iniciar/{idPauta}")
     public ResponseEntity<SessaoDto> iniciarSessao(@RequestBody @Valid SessaoForm form, @PathVariable(name = "idPauta")Long idPauta) {
         if (sessaoService.criarSessao(form, idPauta) != null) {
