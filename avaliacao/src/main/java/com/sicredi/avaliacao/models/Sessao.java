@@ -18,7 +18,7 @@ public class Sessao {
     public Sessao(){
         super();
     }
-    public Sessao( LocalDateTime dataFim){
+    public Sessao(LocalDateTime dataFim){
         super();
         this.dafaFim=dataFim;
 

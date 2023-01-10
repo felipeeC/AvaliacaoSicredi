@@ -1,13 +1,11 @@
 package com.sicredi.avaliacao.services;
 import com.sicredi.avaliacao.Conversores.ConversorSessao;
 import com.sicredi.avaliacao.dtos.SessaoForm;
-import com.sicredi.avaliacao.models.Pauta;
 import com.sicredi.avaliacao.models.Sessao;
 import com.sicredi.avaliacao.repositories.SessaoRepository;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.*;
 @Service
@@ -22,6 +20,7 @@ public class SessaoService {
         sessao.setDataInicio(LocalDateTime.now());
         if(form.getDataFim() == null){
             sessao.setDafaFim(LocalDateTime.now().plusMinutes(1));
+            sessaoRepository.save(sessao);
             return sessao;
         }
         if (sessao.getDafaFim().isBefore(sessao.getDataInicio())){
@@ -37,9 +36,6 @@ public class SessaoService {
         Optional<Sessao> sessao = Optional.ofNullable(BuscarSessaoPorId(idSessao));
         sessao.get().getPautas().add(pautaService.buscarPautaPorId(idPauta));
         sessaoRepository.save(sessao.get());
-    }
-    public Sessao converterSessaoFormEmSessao(SessaoForm form){
-        return ConversorSessao.converterSessaoFormParaSessao(form);
     }
     public Sessao BuscarSessaoPorId(Long id){
         Optional<Sessao> obj = sessaoRepository.findById(id);

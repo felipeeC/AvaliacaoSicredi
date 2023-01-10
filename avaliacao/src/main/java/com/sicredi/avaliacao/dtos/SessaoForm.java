@@ -1,5 +1,4 @@
 package com.sicredi.avaliacao.dtos;
-import com.sicredi.avaliacao.models.Sessao;
 import java.time.LocalDateTime;
 
 public class SessaoForm {
@@ -7,7 +6,6 @@ public class SessaoForm {
     public SessaoForm(){
         super();
     }
-
     public SessaoForm( LocalDateTime dataFim){
         this.dataFim=dataFim;
     }
@@ -18,5 +16,4 @@ public class SessaoForm {
     public void setDataFim(LocalDateTime dataFim) {
         this.dataFim = dataFim;
     }
-
 }

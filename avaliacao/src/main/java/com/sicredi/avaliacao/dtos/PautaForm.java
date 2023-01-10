@@ -1,5 +1,4 @@
 package com.sicredi.avaliacao.dtos;
-import com.sicredi.avaliacao.models.Pauta;
 import javax.validation.constraints.NotNull;
 public class PautaForm {
     @NotNull
@@ -23,5 +22,4 @@ public class PautaForm {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
 }

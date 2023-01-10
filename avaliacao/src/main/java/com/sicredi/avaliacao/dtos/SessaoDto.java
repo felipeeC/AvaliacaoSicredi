@@ -1,8 +1,6 @@
 package com.sicredi.avaliacao.dtos;
 import com.sicredi.avaliacao.models.Sessao;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class SessaoDto {
     private Long id;
@@ -38,6 +36,4 @@ public class SessaoDto {
     public void setDataFim(LocalDateTime dataFim) {
         this.dataFim = dataFim;
     }
-
-
 }

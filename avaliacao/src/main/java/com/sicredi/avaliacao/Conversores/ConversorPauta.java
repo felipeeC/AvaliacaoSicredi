@@ -1,8 +1,6 @@
 package com.sicredi.avaliacao.Conversores;
-
 import com.sicredi.avaliacao.dtos.PautaDto;
 import com.sicredi.avaliacao.models.Pauta;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

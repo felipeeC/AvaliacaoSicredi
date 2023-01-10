@@ -1,8 +1,6 @@
 package com.sicredi.avaliacao.dtos;
 import com.sicredi.avaliacao.models.Voto;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 public class VotoDto {
     private Long id;
     private String cpf;

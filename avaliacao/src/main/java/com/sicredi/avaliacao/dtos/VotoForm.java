@@ -1,5 +1,4 @@
 package com.sicredi.avaliacao.dtos;
-import com.sicredi.avaliacao.models.Voto;
 import javax.validation.constraints.NotNull;
 public class VotoForm {
     @NotNull
@@ -33,5 +32,4 @@ public class VotoForm {
     public void setResposta(String resposta) {
         this.resposta = resposta;
     }
-
 }

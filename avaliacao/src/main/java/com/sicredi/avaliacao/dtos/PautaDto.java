@@ -1,7 +1,5 @@
 package com.sicredi.avaliacao.dtos;
 import com.sicredi.avaliacao.models.Pauta;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class PautaDto {
     private Long id;
@@ -33,5 +31,4 @@ public class PautaDto {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
 }
