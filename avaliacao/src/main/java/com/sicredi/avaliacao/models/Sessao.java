@@ -1,7 +1,6 @@
 package com.sicredi.avaliacao.models;
-
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 @Entity
@@ -9,26 +8,22 @@ public class Sessao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date dataInicio;
-    private Date dafaFim;
-
+    private LocalDateTime dataInicio;
+    private LocalDateTime dafaFim;
     @ManyToMany
     private List<Pauta> pautas = new ArrayList<>();
     @ManyToMany
     private List<Voto> votos = new ArrayList<>();
 
-    //Constructors
     public Sessao(){
         super();
     }
-
-    public Sessao( Date dataFim){
+    public Sessao( LocalDateTime dataFim){
         super();
         this.dafaFim=dataFim;
 
     }
 
-    //Getters e Setters
     public List<Pauta> getPautas() {
         return pautas;
     }
@@ -47,16 +42,16 @@ public class Sessao {
     public void setId(Long id) {
         this.id = id;
     }
-    public Date getDataInicio() {
+    public LocalDateTime getDataInicio() {
         return dataInicio;
     }
-    public void setDataInicio(Date dataInicio) {
+    public void setDataInicio(LocalDateTime dataInicio) {
         this.dataInicio = dataInicio;
     }
-    public Date getDafaFim() {
+    public LocalDateTime getDafaFim() {
         return dafaFim;
     }
-    public void setDafaFim(Date dafaFim) {
+    public void setDafaFim(LocalDateTime dafaFim) {
         this.dafaFim = dafaFim;
     }
     @Override
