@@ -1,18 +1,15 @@
 package com.sicredi.avaliacao.services;
-
 import com.sicredi.avaliacao.dtos.VotoForm;
 import com.sicredi.avaliacao.models.Sessao;
 import com.sicredi.avaliacao.models.Voto;
+import com.sicredi.avaliacao.Conversores.ConversorVoto;
 import com.sicredi.avaliacao.repositories.VotoRepository;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.validation.Valid;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Optional;
 @Service
 public class VotoService {
     @Autowired
@@ -20,22 +17,21 @@ public class VotoService {
     @Autowired
     private VotoRepository votoRepository;
     public Voto votar(@Valid VotoForm form){
-        Voto voto = converteVotoForm(form);
-        Date date = new Date(System.currentTimeMillis());
-        voto.setDataVoto(date);
+        Voto voto = ConversorVoto.converterVotoFormEmVoto(form.getCpf(), form.getResposta(), form.getIdSessao());
+        voto.setDataVoto(LocalDateTime.now());
         voto.setCpf(form.getCpf());
         voto.setResposta(form.getResposta());
         voto.setIdSessao(form.getIdSessao());
+        System.out.println("DataDoVoto: "+ voto.getDataVoto());
         votoRepository.save(voto);
         return voto;
     }
 
-    public boolean verificaVotoSeExiste(VotoForm form){
+    public boolean verificarSeJaVotou(VotoForm form){
         List<Voto> votos = votoRepository.findAll();
         boolean validador=false;
         for (Voto votoList : votos) {
             if(votoList.getCpf().equals(form.getCpf())  && votoList.getIdSessao().equals(form.getIdSessao())){
-
                  validador = true;
             }else {
                 validador = false;
@@ -43,59 +39,43 @@ public class VotoService {
         }
         return validador;
     }
-    public Voto converteVotoForm(VotoForm form){
-        Voto voto = form.converter();
-        return voto;
-    }
 
-    public String contabilizaVotos(Long idSessao) {
-
+    public String contabilizarVotos(Long idSessao) {
         List<Voto>votos = votoRepository.findAll();
-
         int contadorSim = 0;
         int contadorNao = 0;
         for (Voto voto : votos) {
-
-
             if(voto.getIdSessao() == idSessao){
-
                 if (voto.getResposta().equals("sim")) {
-
                     contadorSim+=1;
+                }else {
+                    contadorNao += 1;
                 }
-                if (voto.getResposta().equals("não")) {
-                    contadorNao+=1;
-                }
-
             }
         }
-
-        String Resultado = ("Votos SIM: " + contadorSim + " Votos NÃO: " + contadorNao);
-        return Resultado;
+        return ("Votos SIM: " + contadorSim + " Votos NÃO: " + contadorNao);
     }
-    public boolean validaRequest(VotoForm form){
-
+    public boolean validarRequest(VotoForm form){
         if(form.getIdSessao()==null){
             return false;
         }
-        if(!sessaoService.verificaSessaoIfExist(form.getIdSessao())){
+        if(!sessaoService.verificarSeSessaoExiste(form.getIdSessao())){
             return false;
         }
-        Sessao sessao=sessaoService.getSessaoById(form.getIdSessao());
-        Date date = new Date(System.currentTimeMillis());
+        Sessao sessao=sessaoService.BuscarSessaoPorId(form.getIdSessao());
         if(form==null){
             return false;
         }
-        if(sessao.getDafaFim().getTime()< date.getTime()){
+        if(sessao.getDafaFim().isBefore(LocalDateTime.now())){
             return false;
         }
-        if(!validaCPF(form.getCpf())){
+        if(!validarCpf(form.getCpf())){
             return false;
         }
         if(!(form.getResposta().equals("sim") || form.getResposta().equals("não"))){
             return false;
         }
-        if(verificaVotoSeExiste(form)){
+        if(verificarSeJaVotou(form)){
             return false;
         }
         if(form.getCpf() == null){
@@ -108,8 +88,7 @@ public class VotoService {
             return true;
         }
     }
-
-    public static boolean validaCPF(String CPF) {
+    public static boolean validarCpf(String CPF) {
         // considera-se erro CPF's formados por uma sequencia de numeros iguais
         if (CPF.equals("00000000000") ||
                 CPF.equals("11111111111") ||
@@ -119,10 +98,8 @@ public class VotoService {
                 CPF.equals("88888888888") || CPF.equals("99999999999") ||
                 (CPF.length() != 11))
             return(false);
-
         char dig10, dig11;
         int sm, i, r, num, peso;
-
         // "try" - protege o codigo para eventuais erros de conversao de tipo (int)
         try {
             // Calculo do 1o. Digito Verificador
@@ -136,7 +113,6 @@ public class VotoService {
                 sm = sm + (num * peso);
                 peso = peso - 1;
             }
-
             r = 11 - (sm % 11);
             if ((r == 10) || (r == 11))
                 dig10 = '0';
@@ -150,12 +126,10 @@ public class VotoService {
                 sm = sm + (num * peso);
                 peso = peso - 1;
             }
-
             r = 11 - (sm % 11);
             if ((r == 10) || (r == 11))
                 dig11 = '0';
             else dig11 = (char)(r + 48);
-
             // Verifica se os digitos calculados conferem com os digitos informados.
             if ((dig10 == CPF.charAt(9)) && (dig11 == CPF.charAt(10)))
                 return(true);
@@ -164,8 +138,6 @@ public class VotoService {
             return(false);
         }
     }
-
-
 }
 
 

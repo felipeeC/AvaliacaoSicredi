@@ -1,17 +1,13 @@
 package com.sicredi.avaliacao.dtos;
-
 import com.sicredi.avaliacao.models.Voto;
-
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
-
 public class VotoDto {
     private Long id;
     private String cpf;
-    private Date dataVoto;
+    private LocalDateTime dataVoto;
     private String resposta;
-
     private Long idSessao;
 
     public VotoDto(Voto voto){
@@ -22,6 +18,7 @@ public class VotoDto {
         this.resposta = voto.getResposta();
         this.idSessao = voto.getIdSessao();
     }
+
     public Long getIdSessao() {
         return idSessao;
     }
@@ -40,10 +37,10 @@ public class VotoDto {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-    public Date getDataVoto() {
+    public LocalDateTime getDataVoto() {
         return dataVoto;
     }
-    public void setDataVoto(Date dataVoto) {
+    public void setDataVoto(LocalDateTime dataVoto) {
         this.dataVoto = dataVoto;
     }
     public String getResposta() {
@@ -51,8 +48,5 @@ public class VotoDto {
     }
     public void setResposta(String resposta) {
         this.resposta = resposta;
-    }
-    public static List<VotoDto> converter(List<Voto> votos){
-        return votos.stream().map(VotoDto::new).collect(Collectors.toList());
     }
 }

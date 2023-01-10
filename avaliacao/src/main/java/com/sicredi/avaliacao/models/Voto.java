@@ -1,6 +1,7 @@
 package com.sicredi.avaliacao.models;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,19 +10,15 @@ public class Voto {
     @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String cpf;
-    private Date dataVoto;
+    private LocalDateTime dataVoto;
     private String resposta;
     private Long idSessao;
-
     @ManyToMany
     private List<Sessao> sessoes = new ArrayList<>();
 
-
-    //Constructors
     public Voto(){
         super();
     }
-
     public Voto( String cpf, String resposta, Long idSessao){
         super();
         this.cpf = cpf;
@@ -29,7 +26,6 @@ public class Voto {
         this.idSessao =idSessao;
     }
 
-    //Getters e Setters
     public Long getIdSessao() {
         return idSessao;
     }
@@ -48,10 +44,10 @@ public class Voto {
     public void setId(Long id) {
         this.id = id;
     }
-    public Date getDataVoto() {
+    public LocalDateTime getDataVoto() {
         return dataVoto;
     }
-    public void setDataVoto(Date dataVoto) {
+    public void setDataVoto(LocalDateTime dataVoto) {
         this.dataVoto = dataVoto;
     }
     public String getResposta() {
@@ -66,7 +62,6 @@ public class Voto {
     public void setSessoes(List<Sessao> sessoes) {
         this.sessoes = sessoes;
     }
-
     @Override
     public String toString() {
         return this.cpf + "\t" + this.dataVoto + "\t\t" + this.resposta + "\t\t" + this.idSessao;
