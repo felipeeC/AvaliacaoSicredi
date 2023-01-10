@@ -1,7 +1,5 @@
 package com.sicredi.avaliacao.controllers;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sicredi.avaliacao.dtos.PautaForm;
 import com.sicredi.avaliacao.dtos.SessaoForm;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -17,11 +15,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
 import java.net.URI;
 import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.Date;
 
 @ActiveProfiles("test")
 @SpringBootTest
@@ -29,7 +24,6 @@ import java.util.Date;
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SessaoControllerTest {
-
     @Autowired
     private MockMvc mockMvc;
     static final ObjectMapper mapper = new ObjectMapper();
@@ -42,7 +36,6 @@ public class SessaoControllerTest {
             MockMvcRequestBuilders.post(uri).content(asJsonString(sessaoForm)).contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().is(HttpStatus.NOT_FOUND.value()));
     }
-
     public static String asJsonString(final Object obj) {
         try {
             final String jsonContent = mapper.writeValueAsString(obj);
@@ -51,5 +44,4 @@ public class SessaoControllerTest {
             throw new RuntimeException(e);
         }
     }
-
 }

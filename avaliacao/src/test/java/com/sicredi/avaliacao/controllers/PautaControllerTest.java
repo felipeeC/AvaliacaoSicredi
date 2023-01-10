@@ -1,5 +1,4 @@
 package com.sicredi.avaliacao.controllers;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sicredi.avaliacao.dtos.PautaForm;
 import org.junit.jupiter.api.MethodOrderer;
@@ -16,9 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
 import java.net.URI;
-
 
 @ActiveProfiles("test")
 @SpringBootTest
@@ -32,14 +29,11 @@ class PautaControllerTest {
 	@Test
 	public void criaPautaVazia() throws Exception{
 		PautaForm pauta = new PautaForm("", "");
-
 		URI uri = new URI("/pautas");
-
 		mockMvc.perform(
 			MockMvcRequestBuilders.post(uri).content(asJsonString(pauta)).contentType(MediaType.APPLICATION_JSON))
 			.andExpect(MockMvcResultMatchers.status().is(HttpStatus.CONFLICT.value()));
 	}
-
 	public static String asJsonString(final Object obj) {
 		try {
 			final String jsonContent = mapper.writeValueAsString(obj);
@@ -48,5 +42,4 @@ class PautaControllerTest {
 			throw new RuntimeException(e);
 		}
 	}
-
 }

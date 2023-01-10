@@ -9,7 +9,6 @@ public class SessaoForm {
     public SessaoForm( LocalDateTime dataFim){
         this.dataFim=dataFim;
     }
-
     public LocalDateTime getDataFim() {
         return dataFim;
     }

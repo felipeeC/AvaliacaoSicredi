@@ -25,7 +25,6 @@ public class VotoService {
         votoRepository.save(voto);
         return voto;
     }
-
     public boolean verificarSeJaVotou(VotoForm form){
         List<Voto> votos = votoRepository.findAll();
         boolean validador=false;
@@ -38,7 +37,6 @@ public class VotoService {
         }
         return validador;
     }
-
     public String contabilizarVotos(Long idSessao) {
         List<Voto>votos = votoRepository.findAll();
         int contadorSim = 0;

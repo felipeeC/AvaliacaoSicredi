@@ -19,8 +19,9 @@ public class PautaController {
     private PautaService pautaService;
     @PostMapping
     public ResponseEntity<PautaDto> cadastrarPauta(@RequestBody @Valid PautaForm form,UriComponentsBuilder uriBuilder) {
-        Pauta pautaNova = pautaService.criarPauta(form);
-        if (pautaNova != null && !pautaNova.getTitulo().equals("")) {
+
+        Pauta pautaNova = pautaService.criarPauta(pautaService.convertePautaFormParaPauta(form));
+        if (pautaNova != null) {
             URI uri = uriBuilder.path("/pautas/{id}").buildAndExpand(pautaNova.getId()).toUri();
             return ResponseEntity.created(uri).body(new PautaDto(pautaNova));
         } else {

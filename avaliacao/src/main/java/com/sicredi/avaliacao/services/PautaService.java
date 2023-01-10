@@ -6,7 +6,6 @@ import com.sicredi.avaliacao.repositories.PautaRepository;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -16,14 +15,16 @@ public class PautaService {
     public Pauta convertePautaFormParaPauta(PautaForm pautaForm){
         return ConversorPauta.converterPautaFormParaPauta(pautaForm.getTitulo(),pautaForm.getDescricao());
     }
-    public Pauta criarPauta(@Valid PautaForm form){
-        Pauta novaPauta = convertePautaFormParaPauta(form);
+    public Pauta criarPauta(Pauta pauta){
         List<Pauta> pautas = pautaRepository.findAll();
-        if(pautas.contains(novaPauta)){
+        if(pauta.getTitulo().equals("")){
             return null;
         }
-        pautaRepository.save(novaPauta);
-        return novaPauta;
+        if(pautas.contains(pauta)){
+            return null;
+        }
+        pautaRepository.save(pauta);
+        return pauta;
     }
     public Pauta buscarPautaPorId(Long id){
         Optional<Pauta> obj = pautaRepository.findById(id);
