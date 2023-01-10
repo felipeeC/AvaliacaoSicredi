@@ -1,5 +1,5 @@
 package com.sicredi.avaliacao.services;
-
+import com.sicredi.avaliacao.Conversores.ConversorSessao;
 import com.sicredi.avaliacao.dtos.SessaoForm;
 import com.sicredi.avaliacao.models.Pauta;
 import com.sicredi.avaliacao.models.Sessao;
@@ -7,11 +7,9 @@ import com.sicredi.avaliacao.repositories.SessaoRepository;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.*;
-
 @Service
 public class SessaoService {
     @Autowired
@@ -66,13 +64,10 @@ public class SessaoService {
         return obj.orElseThrow(
                 () -> new ObjectNotFoundException("Sessão Não Encontrada! id:"  + id, ""));
     }
-
-    public List<Sessao> imprimeSessoes() {
-        List<Sessao> sessoes = sessaoRepository.findAll();
-        return sessoes;
+    public List<Sessao> imprimirSessoes() {
+        return sessaoRepository.findAll();
     }
-    public boolean verificaSessaoIfExist(Long id){
-
+    public boolean verificarSeSessaoExiste(Long id){
         return sessaoRepository.findById(id).isPresent();
     }
 }
