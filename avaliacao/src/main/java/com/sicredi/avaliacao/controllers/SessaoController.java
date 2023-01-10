@@ -1,10 +1,7 @@
 package com.sicredi.avaliacao.controllers;
-
-import com.sicredi.avaliacao.dtos.PautaDto;
+import com.sicredi.avaliacao.Conversores.ConversorSessao;
 import com.sicredi.avaliacao.dtos.SessaoDto;
 import com.sicredi.avaliacao.dtos.SessaoForm;
-import com.sicredi.avaliacao.models.Pauta;
-import com.sicredi.avaliacao.models.Sessao;
 import com.sicredi.avaliacao.services.SessaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
